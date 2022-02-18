@@ -1,83 +1,94 @@
-// let rock = 'Rock';
-// let paper = 'Paper';
-// let scissors = 'Scissors';
 
-function computerPlay() {
-    let number = Math.ceil(Math.random() * 3);
-    // if (number === 1) {
-    //     return 'Rock';
-    // } 
-    // else if (number === 2) {
-    //     return 'Paper';
-    // }
-    // else {
-    //     return 'Scissors';
-    // }
-    return number;  
-}
 
 // Given a string, the computer will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’.
 // each string should be represented by a number 1-3. the computer will randomly choose a number 1-3.
 // then assign the string to the number. 
 
-function humanPlay() {
-    let playerChoice = prompt('Rock, Paper, or Scissors?')
-    let choiceLower = playerChoice.toLowerCase();
-    if (choiceLower == 'rock') {
-        return 1;
+
+
+function playRound() {
+    function computerPlay() {
+        let number = Math.ceil(Math.random() * 3);
+        return number;  
     }
-    else if (choiceLower == 'paper') {
-        return 2;
+
+    function humanPlay() {
+        let playerChoice = prompt('Rock, Paper, or Scissors?')
+        let choiceLower = playerChoice.toLowerCase();
+        if (choiceLower == 'rock') {
+            return 1;
+        } else if (choiceLower == 'paper') {
+            return 2;
+        } else if (choiceLower == 'scissors') {
+            return 3;
+        } else {
+            alert('Check your spelling and try again.')
+        } return choiceLower;
     }
-    else if (choiceLower == 'scissors') {
-        return 3;
-    }
-    else {
-        alert('Check your spelling and try again.')
-    }
-    return choiceLower;
+    
+    const playerSelection = humanPlay();
+    console.log(playerSelection);
+    const computerSelection = computerPlay();
+    console.log(computerSelection);
+
+    let playerScore = 1;
+    let computerScore = 1; 
+    if ((playerSelection == 1) && (computerSelection == 3)) {
+        alert('Rock breaks scissors. You win.');
+        return playerScore = playerScore + 1;
+    }  else if ((playerSelection == 1) && (computerSelection == 2)) {
+        alert('Paper covers rock. You lose.');
+        return computerScore;
+    }  else if ((playerSelection == 2) && (computerSelection == 1)) {
+        alert('Paper covers rock. You win.');
+        return playerScore = playerScore + 1;
+    }  else if ((playerSelection == 2) && (computerSelection == 3)) {
+        alert('Scissors cut paper. You lose.');
+        return computerScore;
+    }  else if ((playerSelection == 3) && (computerSelection == 2)) {
+        alert('Scissors cut paper. You win.');
+        return playerScore = playerScore + 1;
+    }  else if ((playerSelection == 3) && (computerSelection == 1)) {
+        alert('Scissors break rock. You lose.');
+        return computerScore;
+    }  else if (playerSelection == computerSelection) {   
+        alert('It\s a draw. No point awarded.');
+        return 0;
+    }  
+    return (playerScore + computerScore);
 }
 
-const playerSelection = humanPlay();
-console.log(playerSelection);
-const computerSelection = computerPlay();
-console.log(computerSelection);
+// console.log(playRound());
 
-function playRound(playerSelection, computerSelection) {
-    let playerScore = 0;
-    let computerScore = 0;
-    if (playerSelection == computerSelection) {
-      alert('It\s a draw. Please try again.');
-    }  else if (playerSelection == 1 && computerSelection == 3) {
-        alert('Rock breaks scissors. You win.');
-        return playerScore + 1;
-    }  else if (playerSelection == 1 && computerSelection == 2) {
-        alert('Paper covers rock. You lose.');
-        return computerScore + 1;
-    }  else if (playerSelection == 2 && computerSelection == 1) {
-        alert('Paper covers rock. You win.');
-        return playerScore + 1;
-    }  else if (playerSelection == 2 && computerSelection == 3) {
-        alert('Scissors cut paper. You lose.');
-        return computerScore + 1;
-    }  else if (playerSelection == 3 && computerSelection == 2) {
-        alert('Scissors cut paper. You win.');
-        return playerScore + 1;
-    }  else if (playerSelection == 3 && computerSelection == 1) {
-        alert('Scissors break rock. You lose.');
-        return computerScore + 1;
-    }    
-    return (playerScore + computerScore);
-    }
 
-console.log(playRound(playerSelection, computerSelection));
-
+// play a 5 round game that keeps score and reports a winner or loser at the end.
 function game() {
-    // play a 5 round game that keeps score and reports a winner or loser at the end.
-    for (let i = 0; i < 5; i++) {
-        // humanPlay();
-        playRound();
+    humanScore = 0;
+    computerScore = 0;
+    for (let i = 0; i < 5; i++) { 
+        let score = playRound();
+        if (score == 2) {
+            humanScore++;
+            alert('You got one point. Your score is ' + humanScore + '. Computer\'s score is ' + computerScore + '.');
+                     
+        }
+        else if (score == 1) {
+            computerScore++;
+            alert('That\'s one for the computer, my man. Your score is ' + humanScore + '. Computer\'s score is ' + computerScore + '.')
+            
+        }
+        else if (score == 0) {
+            alert('No change. Your score is ' + humanScore + '. Computer\'s score is ' + computerScore + '.')
+        } 
     }
+    function finalAlert() {
+        if (humanScore > computerScore) {
+            alert('Your final score is ' + humanScore + '. ' + 'The computer got ' + computerScore + '. ' + 'You are the champion!');
+        } else if (computerScore > humanScore) {
+            alert('Your final score is ' + humanScore + '. ' + 'The computer got ' + computerScore + '. ' + 'You are no match for a machine. Computer victory!')
+        }
+    }
+    console.log(finalAlert()); 
 }
 
 console.log(game());
