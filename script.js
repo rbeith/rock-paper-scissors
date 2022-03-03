@@ -1,30 +1,39 @@
-
-
 // Given a string, the computer will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’.
 // each string should be represented by a number 1-3. the computer will randomly choose a number 1-3.
 // then assign the string to the number. 
 
+// let playerChoice = () => humanPlayerValue = this.id;
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    let val = button.id;
+    console.log(val)
+    playRound(val);
+  });
+});
+
+// function playerValue() { 
+//     return humanPlayerValue + 1;
+// }
+// console.log(humanPlayerValue);
 
 
-function playRound() {
+ function playRound(val) {    
     function computerPlay() {
         let number = Math.ceil(Math.random() * 3);
         return number;  
     }
-
-    function humanPlay() {
-        let playerChoice = prompt('Rock, Paper, or Scissors?')
-        let choiceLower = playerChoice.toLowerCase();
-        if (choiceLower == 'rock') {
+    function humanPlay() { 
+        if (val == 1) {
             return 1;
-        } else if (choiceLower == 'paper') {
+        } else if (val == 2) {
             return 2;
-        } else if (choiceLower == 'scissors') {
+        } else if (val == 3) {
             return 3;
-        } else {
-            alert('Check your spelling and try again.')
-        } return choiceLower;
-    }
+        }
+    };
     
     const playerSelection = humanPlay();
     console.log(playerSelection);
@@ -63,24 +72,21 @@ function playRound() {
 
 // play a 5 round game that keeps score and reports a winner or loser at the end.
 function game() {
-    humanScore = 0;
-    computerScore = 0;
-    for (let i = 0; i < 5; i++) { 
-        let score = playRound();
-        if (score == 2) {
-            humanScore++;
-            alert('You got one point. Your score is ' + humanScore + '. Computer\'s score is ' + computerScore + '.');
-                     
-        }
-        else if (score == 1) {
-            computerScore++;
-            alert('That\'s one for the computer, my man. Your score is ' + humanScore + '. Computer\'s score is ' + computerScore + '.')
+    let humanScore = 0;
+    let computerScore = 0;
+    let score = playRound();
+
+    if (score == 2) {
+        humanScore++;
+        alert('You got one point. Your score is ' + humanScore + '. Computer\'s score is ' + computerScore + '.');               
+    } else if (score == 1) {
+        computerScore++;
+        alert('That\'s one for the computer, my man. Your score is ' + humanScore + '. Computer\'s score is ' + computerScore + '.')
             
-        }
-        else if (score == 0) {
-            alert('No change. Your score is ' + humanScore + '. Computer\'s score is ' + computerScore + '.')
-        } 
+    } else if (score == 0) {
+        alert('No change. Your score is ' + humanScore + '. Computer\'s score is ' + computerScore + '.')
     }
+
     function finalAlert() {
         if (humanScore > computerScore) {
             alert('Your final score is ' + humanScore + '. ' + 'The computer got ' + computerScore + '. ' + 'You are the champion!');
@@ -89,16 +95,17 @@ function game() {
         }
     }
     console.log(finalAlert()); 
-}
-
+};   
+    
 console.log(game());
 
-// Play a single round of Rock Paper Scissors from two players: the player and the computer.
-// The player should input either rock, paper or scissors in any case input.
-// Return a string that declares the winner of the round: "You lose! Paper beats Rock."
-// The following are the conditions for winning: paper beats rock. rock beats scissors. scissors beat paper.
-// If the player chooses paper and the computer chooses rock, player wins, but if the computer chooses scissors, computer wins.
-// If the player chooses rock and the computer chooses scissors, player wins, but if the computer chooses paper, computer wins.
-// If the player chooses scissor and the computer chooses paper, player wins, b ut if the computer chooses rock, computer wins.
-// If both players choose the same, re-roll. 
+            // Play a single round of Rock Paper Scissors from two players: the player and the computer.
+            // The player should input either rock, paper or scissors in any case input.
+            // Return a string that declares the winner of the round: "You lose! Paper beats Rock."
+            // The following are the conditions for winning: paper beats rock. rock beats scissors. scissors beat paper.
+            // If the player chooses paper and the computer chooses rock, player wins, but if the computer chooses scissors, computer wins.
+            // If the player chooses rock and the computer chooses scissors, player wins, but if the computer chooses paper, computer wins.
+            // If the player chooses scissor and the computer chooses paper, player wins, b ut if the computer chooses rock, computer wins.
+            // If both players choose the same, re-roll. 
+
 
