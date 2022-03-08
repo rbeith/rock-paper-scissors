@@ -28,3 +28,11 @@ button {
     color: darkgoldenrod;
     height: 3em;
 }
+
+#results {
+    margin: 10%;
+    padding: 16px;
+    border-radius: 5px;
+    border-style: solid;
+    line-height: 2em;
+}
