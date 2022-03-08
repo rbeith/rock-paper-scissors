@@ -4,15 +4,24 @@
 const buttons = document.querySelectorAll('button');
 const container = document.querySelector('#results');
 const content = document.createElement('div');
+content.classList.add('content', 'round', 'victory');        
+container.appendChild(content);
+
+const round = document.createElement('div')
+content.appendChild(round);
+
+const victory = document.createElement('div')
+content.appendChild(victory);
+victory.style.fontWeight = '900';
+
 let humanScore = 0;
 let computerScore = 0; 
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        content.classList.add('content');        
-        container.appendChild(content);
-        const playerSelection = button.id;
 
+
+        const playerSelection = button.id;
         game(playerSelection);
     });
 });
@@ -26,11 +35,9 @@ function game(playerSelection) {
     const computerSelection = computerPlay();
     console.log(playerSelection)
     console.log(computerSelection)
-    const round = document.createElement('div')
-    round.classList.add('round');
-    content.appendChild(round);
+   
     
-    let gameRound = function() {    
+    function gameRound() {    
         let score = 1;
         if ((playerSelection == 1) && (computerSelection == 3)) {
             round.textContent = 'Rock breaks scissors. You win.';
@@ -72,9 +79,9 @@ function game(playerSelection) {
     console.log(computerScore)
 
     if (humanScore == 5) {
-        round.textContent = `Your final score is ${humanScore}. The computer got ${computerScore}. You are the champion!`
+        victory.textContent = `Your final score is ${humanScore}. The computer got ${computerScore}. You are the champion!`
     } else if (computerScore == 5) {
-        round.textContent = `Your final score is ${humanScore}. The computer got ${computerScore}. You are no match for a machine. Computer victory!`
+        victory.textContent = `Your final score is ${humanScore}. The computer got ${computerScore}. You are no match for a machine. Computer victory!`
     }
 };
 
