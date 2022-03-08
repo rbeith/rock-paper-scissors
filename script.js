@@ -19,8 +19,7 @@ let computerScore = 0;
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-
-
+        victory.textContent = ''
         const playerSelection = button.id;
         game(playerSelection);
     });
@@ -74,15 +73,20 @@ function game(playerSelection) {
             } else if (gameRound() == 0) {
                 round.textContent = (`Tie. Your score is ${humanScore}. Computer\'s score is ${computerScore}.`)
             }   return;
-    }; console.log(gameScore())
-    console.log(humanScore)
-    console.log(computerScore)
+    }; 
+console.log(gameScore())
+console.log(humanScore)
+console.log(computerScore)
 
     if (humanScore == 5) {
         victory.textContent = `Your final score is ${humanScore}. The computer got ${computerScore}. You are the champion!`
+        humanScore = 0;
+        computerScore = 0;
     } else if (computerScore == 5) {
         victory.textContent = `Your final score is ${humanScore}. The computer got ${computerScore}. You are no match for a machine. Computer victory!`
-    }
+        humanScore = 0;
+        computerScore = 0;
+    } 
 };
 
 
