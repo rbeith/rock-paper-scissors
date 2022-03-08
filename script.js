@@ -4,15 +4,16 @@
 const buttons = document.querySelectorAll('button');
 const container = document.querySelector('#results');
 const content = document.createElement('div');
+let humanScore = 0;
+let computerScore = 0; 
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-      let playerSelection = button.id;
-      content.classList.add('content');
-      container.appendChild(content);
-      playRound(playerSelection);
-      console.log(playRound(playerSelection))
-      //game();
+        content.classList.add('content');        
+        container.appendChild(content);
+        const playerSelection = button.id;
+
+        game(playerSelection);
     });
 });
 
@@ -21,74 +22,71 @@ function computerPlay() {
         return number;  
 };
 
-// function humanPlay(val, score) {
-//     if (val == 1) {
-//         score = 1;
-//     } else if (val == 2) {
-//         score = 2;
-//     } else if (val == 3) {
-//         score = 3;
-//     }; return score;
-// };
-
-function playRound(playerSelection) {
+function game(playerSelection) {
     const computerSelection = computerPlay();
     console.log(playerSelection)
     console.log(computerSelection)
-    let playerScore = 0;
-    let computerScore = 0; 
-    if ((playerSelection == 1) && (computerSelection == 3)) {
-        content.textContent = 'Rock breaks scissors. You win.';
-        return playerScore = playerScore + 1;
-    }  else if ((playerSelection == 1) && (computerSelection == 2)) {
-        content.textContent = 'Paper covers rock. You lose.';
-        return computerScore;
-    }  else if ((playerSelection == 2) && (computerSelection == 1)) {
-        content.textContent = 'Paper covers rock. You win.';
-        return playerScore = playerScore + 1;
-    }  else if ((playerSelection == 2) && (computerSelection == 3)) {
-        content.textContent = 'Scissors cut paper. You lose.';
-        return computerScore;
-    }  else if ((playerSelection == 3) && (computerSelection == 2)) {
-        content.textContent = 'Scissors cut paper. You win.';
-        return playerScore = playerScore + 1;
-    }  else if ((playerSelection == 3) && (computerSelection == 1)) {
-        content.textContent = 'Rock break scissors. You lose.';
-        return computerScore;
-    }  else if (playerSelection == computerSelection) {   
-        content.textContent = 'It\s a draw. No point awarded.';
-        return 0;
-    }  
-};
+    const round = document.createElement('div')
+    round.classList.add('round');
+    content.appendChild(round);
+    
+    let gameRound = function() {    
+        let score = 1;
+        if ((playerSelection == 1) && (computerSelection == 3)) {
+            round.textContent = 'Rock breaks scissors. You win.';
+            score++;
+        }  else if ((playerSelection == 1) && (computerSelection == 2)) {
+            round.textContent = 'Paper covers rock. You lose.';
+        }  else if ((playerSelection == 2) && (computerSelection == 1)) {
+            round.textContent = 'Paper covers rock. You win.';
+            score++;
+        }  else if ((playerSelection == 2) && (computerSelection == 3)) {
+            round.textContent = 'Scissors cut paper. You lose.';
+        }  else if ((playerSelection == 3) && (computerSelection == 2)) {
+            round.textContent = 'Scissors cut paper. You win.';
+            score++;
+        }  else if ((playerSelection == 3) && (computerSelection == 1)) {
+            round.textContent = 'Rock break scissors. You lose.';
+        }  else if (playerSelection == computerSelection) {   
+            round.textContent = 'It\s a draw. You both chose the same.';
+            score--;
+        } return score;  
+    };    console.log(gameRound())
 
-function game() {
-    let humanScore = 0;
-    let computerScore = 0;
-    if (score == 2) {
-        humanScore++;
-        content.textContent = 'You got one point. Your score is ' + humanScore + '. Computer\'s score is '
-        + computerScore + '.'               
-    } else if (score == 1) {
-        computerScore++;
-        content.textContent = 'That\'s one for the computer, my man. Your score is '
-        + humanScore + '. Computer\'s score is ' + computerScore + '.'
-    } else if (score == 0) {
-        content.textContent = 'Tie. Your score is ' + humanScore +
-        '. Computer\'s score is ' + computerScore + '.'
+    function gameScore() {   
+            if (gameRound() == 2) {
+                humanScore++;
+                round.textContent = (`You got one point. Your score is ${humanScore}. Computer\'s score is
+                ${computerScore}.`)              
+                return humanScore;
+            } else if (gameRound() == 1) {
+                computerScore++
+                round.textContent = (`That\'s one for the computer, my man. Your score is
+                ${humanScore}. Computer\'s score is ${computerScore}.`)
+                return computerScore;
+            } else if (gameRound() == 0) {
+                round.textContent = (`Tie. Your score is ${humanScore}. Computer\'s score is ${computerScore}.`)
+            }   return;
+    }; console.log(gameScore())
+    console.log(humanScore)
+    console.log(computerScore)
+
+    if (humanScore == 5) {
+        round.textContent = `Your final score is ${humanScore}. The computer got ${computerScore}. You are the champion!`
+    } else if (computerScore == 5) {
+        round.textContent = `Your final score is ${humanScore}. The computer got ${computerScore}. You are no match for a machine. Computer victory!`
     }
-
-    //for (let i = 0; i < 5; i++) {     
-        function finalAlert() {
-            if (humanScore > computerScore) {
-                content.textContent = 'Your final score is ' + humanScore + '. ' + 'The computer got '
-                + computerScore + '. ' + 'You are the champion!'
-            } else if (computerScore > humanScore) {
-                content.textContent = 'Your final score is ' + humanScore + '. ' + 'The computer got '
-                + computerScore + '. ' + 'You are no match for a machine. Computer victory!'
-            }
-        } return content.textContent = finalAlert();
-    // };
 };
+
+
+
+
+
+
+    // finalAlert();
+    // console.log(finalAlert())
+
+
             // Play a single round of Rock Paper Scissors from two players: the player and the computer.
             // The player should input either rock, paper or scissors in any case input.
             // Return a string that declares the winner of the round: "You lose! Paper beats Rock."
