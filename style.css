@@ -3,34 +3,51 @@ body, html {
 }
 
 body {
+    margin: 10vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: antiquewhite;
+}
+
+h1 {
+    font-family: monospace;
+    text-decoration: underline;
+    font-size: 48px;
+    font-style: italic;
 }
 
 .intro {
-    font-size: large;
+    font-size: larger;
 }
 
 .buttons {
-    margin-top: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 2em;
     gap: 2em;
 }
+    
 
-button {
-    font-size: large;
-    font-weight: 700;
+button {    
+    font-size: 24px;
+    height: 100px;
+    width: 125px;
+    font-weight: 900;
     border-radius: 5px;
     color: darkgoldenrod;
-    height: 3em;
+    text-shadow: 1px 1px darkblue;
+    background-color: aliceblue;
 }
 
 #results {
-    margin: 10%;
+    background-color: aliceblue;
+    width: 400px;
+    height: 250px;
+    font-size: large;
+    margin: 50px auto;
     padding: 16px;
     border-radius: 5px;
     border-style: solid;
